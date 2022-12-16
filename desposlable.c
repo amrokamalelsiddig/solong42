@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   desposlable.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:52:21 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 18:09:22 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/10/23 15:59:42 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void ft_init(t_map *map)
+int locate_enemy(t_map *m)
 {
-	map->count_c = 0;
-	map->count_p = 0;
-	map->count_e = 0;
-	map->count_moves = 0;
-	map->collect_path = 0;
+	int i;
+
+	i = m->width;
+	while (m->map[i] != 'N')
+		i++;
+	m->current_location = i; 
+	return (i);
 }
 
-void	ft_in(t_map *m, int hight, int width)
+int	locate_exit(t_map *m)
 {
-	m->hight = hight;
-	m->width = width;
-	m->size = hight * width;
+	int	i;
+
+	i = m->width;
+	while (m->map[i] != 'E')
+		i++;
+	m->current_location = i; 
+	return (i);
 }

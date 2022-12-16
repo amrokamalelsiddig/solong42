@@ -6,11 +6,21 @@
 #    By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 13:46:37 by aelsiddi          #+#    #+#              #
-#    Updated: 2022/12/15 08:05:49 by aelsiddi         ###   ########.fr        #
+#    Updated: 2022/12/15 17:19:06 by aelsiddi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS 	= 	error.c ft_itoa.c init.c libft.c output.c so_long.c validation.c validation2.c
+SRCS 	= 	vail.c\
+			init.c\
+			error.c\
+			print.c\
+			color.c\
+			movment.c\
+			path.c\
+			so_long.c\
+			ft_itoa.c\
+			term.c\
+			desposlable.c
 
 OBJS			= $(SRCS:.c=.o)
 CC				= gcc

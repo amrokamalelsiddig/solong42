@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation2.c                                      :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 23:56:00 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 08:23:02 by aelsiddi         ###   ########.fr       */
+/*   Created: 2022/09/11 18:51:29 by aelsiddi          #+#    #+#             */
+/*   Updated: 2022/09/11 18:55:22 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void fill_map(t_map *map)
+
+void yellow()
 {
-    int i;
-    char buff;
-    
-	printf("reached\n");
-    map->map = (char*)malloc(map->size);
-    i = 0;
-	while(read(map->fd2,&buff,1) > 0  && buff != '\0')
-    {
-		printf("reached2\n");
-        printf("%c",buff);
-        if (buff != '\n')
-        {
-            map->map[i] = buff;
-            i++;
-        }
-    }
-    close(map->fd2);
+  printf("\033[1;33m");
 }
 
+void red()
+{
+    printf("\033[1;31m");
+}
 
+void reset()
+{
+    printf("\033[0m");
+}
+
+void Green()
+{
+    printf("\033[0;32m");
+}
+
+void Black()
+{    
+    printf("\033[0;30m");
+}
+void Cyan()
+{
+    printf("\033[0;36m");
+}
+    

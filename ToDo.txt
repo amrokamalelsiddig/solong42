@@ -1,0 +1,7 @@
+exit door √
+die √
+exit frame
+mem leaks  √
+norm
+vaild path 
+

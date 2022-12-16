@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 00:09:03 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:02:13 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,45 @@
 
 void error_handling(int i)
 {
-	if (i == 1)
-		ft_putstr_fd("Map is invalid : Missing one of the required element \n", 1);
-	else if (i == 2)
-		ft_putstr_fd("Map invalid\n", 1);
-	else if (i == 3)
-		ft_putstr_fd("Map is invalid : dimension\n",1);
-	else if (i == 4)
-		ft_putstr_fd("Map is invalid :issue with FD\n",1);
-	exit(0);
+    red();
+    if (i == 1)
+        printf("map unvalied \n");
+    else if (i == 3)
+        printf("\nborder unvalid\n");
+    else if (i == 4)
+        printf("\nUpper / Lower boarder is not valid\n");
+    else if (i == 5)
+        printf("\nside boarder not valid\n");
+    else if (i == 6)
+        printf("\nreading error\n");
+    else if (i == 7)
+        printf("\nFailed >> Moved outside map boarder\n");
+    else if (i == 8)
+        printf("\nFileError : No Valid Path \n");
+    else if (i == 9)
+        printf("Failed >> 1 or More of Required Element Missing  \n");
+	else if (i == 10)
+		printf("\n invalid : File extension not ber\n");
+	else if (i == 11)
+		printf("\n issue with width/hight\n");
+    reset();
+    exit(0);
+}
+
+void error_handling1(int i,int fd,t_map *m)
+{
+	(void)m;
+	if(fd >-1)
+	{
+		close(fd);
+	}
+    red();
+    if (i == 1)
+        printf("map unvalied \n");
+    else if (i == 8)
+        printf("\nFileError : 3No Valid Path \n");
+	else if (i == 11)
+		printf("\n issue with width/hight\n");
+    reset();
+    exit(0);
 }
