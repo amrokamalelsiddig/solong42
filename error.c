@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 15:29:14 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:38:08 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,31 @@ void error_handling1(int i,int fd,t_map *m)
 
 void exiting(t_map *map, int flag)
 {
-    if (flag == 1)
+    if (flag == 1)      
     {
         write(1,">>>>> Game Over <<<<<\n",22);
         mlx_destroy_window(map->mlx,map->window);
-        free(map->map);
+        if (map->map)
+            free(map->map);
+        else if (map->map_2)
+            free(map->map_2);
     }
-    exit(1);
+    if (flag == 2)
+    {
+        write(1,">>>>> DIE HARD NOOB !! <<<<<\n",30);
+        mlx_destroy_window(map->mlx,map->window);
+        if (map->map)
+            free(map->map);
+        else if (map->map_2)
+            free(map->map_2);
+    }
+    if (flag == 3)
+    {
+        write(1,">>>>> Evaluator Gave up <<<<<\n",30);
+        if (map->map)
+            free(map->map);
+        else if (map->map_2)
+            free(map->map_2);
+    }
+    exit(0);
 }

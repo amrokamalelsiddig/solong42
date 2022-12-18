@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 10:54:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/17 22:37:27 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:38:46 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,13 @@ void draw(t_map *m)
 
 void print_move(t_map *map)
 {
-	write(1, "MOVES", 6);
-	ft_putnbr_fd(map->count_moves, 1);
-	write(1, "\n", 1);
+	if (map->count_moves_screen != map->count_moves)
+	{
+		map->count_moves_screen = map->count_moves;
+		write(1, "Number of moves\t: ", 19);
+		ft_putnbr_fd(map->count_moves_screen, 1);
+		write(1, "\n", 1);
+	}
 }
 
 void	ft_init_xlm(t_map *map)
@@ -94,6 +98,11 @@ char *pic_path(t_map *map,int i, char c)
 	return (res);
 }
 
+int	mlx_close(int keycode, t_map *map)
+{
+	exiting(map,3);
+	return (0);
+}
 
 int	main(int ac, char **argv)
 {
@@ -108,11 +117,12 @@ int	main(int ac, char **argv)
 	if (map.fd2 <= 0)
 		error_handling(1);
 	ft_init(&map);
-	vaild(argv[1],&map);
+	valid(argv[1],&map);
 	ft_init_xlm(&map);
-	print_move(&map);
+	// print_move(&map);
 	draw(&map);
 	mlx_key_hook(map.window, move_char, &map);
+	mlx_hook(map.window, 17, 1L << 0, mlx_close, &map);
 	mlx_loop_hook(map.mlx, enemy_move, &map);
 	mlx_loop(map.mlx);
 	return (0);

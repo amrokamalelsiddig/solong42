@@ -1,7 +1,12 @@
-exit door √
-die √
+exit door 			√
+die 				√
+esc					√
+vaild path 			√
+img        			√
+mem leaks  			√
 exit frame
-mem leaks  √
-norm
-vaild path 
+Makefile
+norm  
+
+
 

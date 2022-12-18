@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 14:46:19 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:23:28 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int element_validation(t_map *map)
 	return (1);
 }
 
-int validtion(t_map *map)
+int validation(t_map *map)
 {
 	int width;
 	int hight;
@@ -52,14 +52,9 @@ int validtion(t_map *map)
 	hight = 1;
 	v_width = 0;
 	while(read(map->fd2,&buff,1)&& check_char(buff) && buff != '\n')
-	{
 		width++;
-		printf("%c",buff);
-	}
-	printf("\n");
 	while (read(map->fd2,&buff,1) && check_char(buff))
 	{
-		printf("%c",buff);
 		if(buff == '\n')
 		{
 			hight++;
@@ -96,7 +91,8 @@ void fill_map(t_map *map)
 			i++;
 		}
 	}
-	map->map_2[i] == '\0';
+	// map->map[i] == '\0';
+	// map->map_2[i] == '\0';
 	close(fd);
 }
 
@@ -148,20 +144,20 @@ void check_cond(char *av)
 	error_handling(10);
 }
 
-void vaild(char *av, t_map *map)
+void valid(char *av, t_map *map)
 {
 	check_cond(av);
 	map->fd = open(av,O_RDONLY);
 	if (!(map->fd))
 		error_handling1(8,-1,NULL);
 	element_validation(map);
-	if (validtion(map) < 0)
+	if (validation(map) < 0)
 		error_handling1(11,map->fd2,NULL);
 	map->fd3 = map->fd;
 	fill_map(map);
 	if (border_validation(map) != 1)
 		error_handling(3);
-	check_box(map,locate_p(map));
+	check_box(map,locate_char(map));
 	if (!(map->valid == 1) || map->collect_path != map->count_c)
 		error_handling(8);
 }

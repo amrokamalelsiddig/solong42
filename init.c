@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:52:21 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 18:09:22 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 18:20:44 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void ft_init(t_map *map)
 	map->count_p = 0;
 	map->count_e = 0;
 	map->count_moves = 0;
+	map->count_moves_screen = 0;
 	map->collect_path = 0;
 }
 
