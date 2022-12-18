@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 18:02:13 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:29:14 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void error_handling(int i)
     else if (i == 7)
         printf("\nFailed >> Moved outside map boarder\n");
     else if (i == 8)
-        printf("\nFileError : No Valid Path \n");
+        printf("\nError : No Valid Path \n");
     else if (i == 9)
         printf("Failed >> 1 or More of Required Element Missing  \n");
 	else if (i == 10)
@@ -55,4 +55,16 @@ void error_handling1(int i,int fd,t_map *m)
 		printf("\n issue with width/hight\n");
     reset();
     exit(0);
+}
+
+
+void exiting(t_map *map, int flag)
+{
+    if (flag == 1)
+    {
+        write(1,">>>>> Game Over <<<<<\n",22);
+        mlx_destroy_window(map->mlx,map->window);
+        free(map->map);
+    }
+    exit(1);
 }

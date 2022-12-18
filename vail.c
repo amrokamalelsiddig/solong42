@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vail.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 18:21:17 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 14:46:19 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ int element_validation(t_map *map)
 	close(map->fd);
 	if (!(map->count_c > 0 && map->count_p > 0 && map->count_e > 0))
 		error_handling(9);
-	printf("c count %i\n",map->count_c);
-	printf("p count	%i\n",map->count_p);
-	printf("e count %i\n",map->count_e);
 	return (1);
 }
 
@@ -77,8 +74,6 @@ int validtion(t_map *map)
 	hight++;
 	ft_in(map,hight,width);
 	close(map->fd);
-	printf("\nwidth >>  %d\n", width);
-	printf("hight >>  %d\n", hight);
 	return (width * hight);
 }
 
@@ -86,21 +81,23 @@ void fill_map(t_map *map)
 {
 	int i;
 	char buff;
-	int fd;
+	int fd = 0;
 	
 	fd = open(map->file_name,O_RDONLY);
 	map->map = (char*)malloc(map->size);
+	map->map_2 = (char*)malloc(map->size);
 	i = 0;
 	while(read(map->fd,&buff,1))
 	{
-		// printf("%c",buff);
 		if (buff != '\n')
 		{
 			map->map[i] = buff;
+			map->map_2[i] = buff;
 			i++;
 		}
 	}
-	close(map->fd);
+	map->map_2[i] == '\0';
+	close(fd);
 }
 
 // This funcatioon will check border of the map and ensure they are all r walls
@@ -139,7 +136,6 @@ void check_cond(char *av)
 	i = 0;
 	while(av[i++])
 	{
-		printf("reached\n");
 		while (av[i] != '.')
 			i++;
 		if (av[i]== '.')
@@ -155,7 +151,6 @@ void check_cond(char *av)
 void vaild(char *av, t_map *map)
 {
 	check_cond(av);
-	printf("%s\n",map->file_name);
 	map->fd = open(av,O_RDONLY);
 	if (!(map->fd))
 		error_handling1(8,-1,NULL);

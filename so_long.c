@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 10:54:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 18:21:55 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/17 22:37:27 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void draw(t_map *m)
 		}
 		counter++;
 	}
-	mlx_string_put(m->mlx, m->window, 10, 10, 0xFFFF5615, ft_itoa(m->count_moves));
+	mlx_string_put(m->mlx, m->window, 5, 10, 0xFFFF5615, ft_itoa(m->count_moves));
 }
 
 void print_move(t_map *map)
@@ -55,22 +55,45 @@ void print_move(t_map *map)
 
 void	ft_init_xlm(t_map *map)
 {
+	map->mo_flag = 0;
 	map->mlx = mlx_init();
 	map->window = mlx_new_window(map->mlx,(map->width * 48), \
 		(map->hight * 48), "hello world");
 	map->img_wall = mlx_xpm_file_to_image(map->mlx,\
-		"./img/tile2.xpm",&map->img_w, &map->img_h);
+		"./img/wall.xpm",&map->img_w, &map->img_h);
 	map->img_floor = mlx_xpm_file_to_image(map->mlx,\
-		"./img/free_tile.xpm",&map->img_w, &map->img_h);
+		"./img/empty.xpm",&map->img_w, &map->img_h);
 	map->img_door = mlx_xpm_file_to_image(map->mlx,\
-		"./img/door.xpm",&map->img_w, &map->img_h);
-	map->img_char = mlx_xpm_file_to_image(map->mlx,\
-	"./img/char.xpm",&map->img_w, &map->img_h);
-	map->img_clc = mlx_xpm_file_to_image(map->mlx,"./img/coin1.xpm",\
+		"./img/exit.xpm",&map->img_w, &map->img_h);
+	map->img_clc = mlx_xpm_file_to_image(map->mlx,"./img/collect.xpm",\
 		&map->img_w, &map->img_h);
-	map->img_eney = mlx_xpm_file_to_image(map->mlx, "./img/enemy.xpm", \
-		&map->img_w, &map->img_h);
+
+	map->img_char = mlx_xpm_file_to_image(map->mlx,"./img/player.xpm",&map->img_w, &map->img_h);
+	// map->img_char = mlx_xpm_file_to_image(map->mlx,pic_path(map,1,'P'),&map->img_w, &map->img_h);
+	map->img_eney = mlx_xpm_file_to_image(map->mlx, "./img/enemy1.xpm", &map->img_w, &map->img_h);
+	
 }
+
+char *pic_path(t_map *map,int i, char c)
+{
+	char *res;
+	char *holder;
+	
+	if (i = 1 && c == 'P')
+	{
+		if ( map->mo_flag < 17)
+		{
+			holder = ft_itoa(map->mo_flag);
+			res = ft_strjoin("./img/ch_xpm/",holder);
+			res = ft_strjoin(res,"r.xpm");
+			map->mo_flag++;
+		}
+		map->mo_flag = 0;
+		res = "./img/ch_xpm/0r.xpm";
+	}
+	return (res);
+}
+
 
 int	main(int ac, char **argv)
 {
@@ -85,11 +108,9 @@ int	main(int ac, char **argv)
 	if (map.fd2 <= 0)
 		error_handling(1);
 	ft_init(&map);
-	// printf("%d\n",check_cond(argv[1]));
 	vaild(argv[1],&map);
-
 	ft_init_xlm(&map);
-	// print_map(&map);
+	print_move(&map);
 	draw(&map);
 	mlx_key_hook(map.window, move_char, &map);
 	mlx_loop_hook(map.mlx, enemy_move, &map);

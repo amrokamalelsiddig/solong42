@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movment.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:35:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/15 09:50:35 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/18 15:34:56 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,16 @@ int		move_char(int c, t_map *m)
 	int	current_loc;
 
 	current_loc = locate_char(m);
-	if (c == 13)
+	if (c == 13 || c == 65362) 
 		move_up(m, current_loc, 'P', 'N');
-	else if (c == 0)
+	else if (c == 0 || c ==  65361)
 		move_left(m, current_loc, 'P', 'N');
-	else if (c == 1)
+	else if (c == 1 || c == 65364)
 		move_down(m, current_loc, 'P', 'N');
-	else if (c == 2)
+	else if (c == 2 || c == 65363 )
 		move_right(m, current_loc, 'P', 'N');
+	else if (c == 53 || c == 99 || c == 65307)
+		exiting(m,1);
 	draw(m);
 	return (0);
 }
