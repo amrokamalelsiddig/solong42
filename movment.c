@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:35:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 17:36:48 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:36:31 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int locate_char(t_map *m)
 	return (i);
 }
 
-int locate_enemey(t_map *m)
+int locate_enemy(t_map *m)
 {
 	int i;
 
@@ -126,7 +126,7 @@ int enemy_move(t_map *m)
     int enemy_loc;
     static int flag=0;
 
-    enemy_loc = locate_enemey(m);
+    enemy_loc = locate_enemy(m);
     if(m->map[enemy_loc + 1 ] == '0' && flag == 0) 
     {
         m->map[enemy_loc] = '0';

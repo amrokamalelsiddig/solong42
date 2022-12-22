@@ -1,10 +1,10 @@
 exit door 			√
 die 				√
 esc					√
-vaild path 			√
+valid path 			√
 img        			√
 mem leaks  			√
-exit frame
+exit framework		√
 Makefile
 norm  
 
