@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 18:38:08 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:53:07 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ void error_handling(int i)
 {
     red();
     if (i == 1)
-        printf("map unvalied \n");
+        ft_putstr_fd("map unvalied \n", 1);
     else if (i == 3)
-        printf("\nborder unvalid\n");
+        ft_putstr_fd("\nborder unvalid\n", 1);
     else if (i == 4)
-        printf("\nUpper / Lower boarder is not valid\n");
+        ft_putstr_fd("\nUpper / Lower boarder is not valid\n", 1);
     else if (i == 5)
-        printf("\nside boarder not valid\n");
+        ft_putstr_fd("\nside boarder not valid\n", 1);
     else if (i == 6)
-        printf("\nreading error\n");
+        ft_putstr_fd("\nreading error\n", 1);
     else if (i == 7)
-        printf("\nFailed >> Moved outside map boarder\n");
+        ft_putstr_fd("\nFailed >> Moved outside map boarder\n", 1);
     else if (i == 8)
-        printf("\nError : No Valid Path \n");
+        ft_putstr_fd("\nError : No Valid Path \n", 1);
     else if (i == 9)
-        printf("Failed >> 1 or More of Required Element Missing  \n");
-	else if (i == 10)
-		printf("\n invalid : File extension not ber\n");
-	else if (i == 11)
-		printf("\n issue with width/hight\n");
+        ft_putstr_fd("Failed >> 1 or More of Required Element Missing  \n", 1);
+    else if (i == 10)
+        ft_putstr_fd("\n invalid : File extension not ber\n", 1);
+    else if (i == 11)
+        ft_putstr_fd("\n issue with width/hight\n", 1);
     reset();
-    exit(0);
+    exit(1);
 }
 
 void error_handling1(int i,int fd,t_map *m)
@@ -54,37 +54,24 @@ void error_handling1(int i,int fd,t_map *m)
 	else if (i == 11)
 		printf("\n issue with width/hight\n");
     reset();
-    exit(0);
+    exit(1);
 }
 
 
 void exiting(t_map *map, int flag)
 {
+    mlx_destroy_window(map->mlx,map->window);
+    if (map->map)
+        free(map->map);
+    if (map->map_2)
+        free(map->map_2);
+    if (map->fd > 0)
+        close(map->fd);
     if (flag == 1)      
-    {
         write(1,">>>>> Game Over <<<<<\n",22);
-        mlx_destroy_window(map->mlx,map->window);
-        if (map->map)
-            free(map->map);
-        else if (map->map_2)
-            free(map->map_2);
-    }
     if (flag == 2)
-    {
         write(1,">>>>> DIE HARD NOOB !! <<<<<\n",30);
-        mlx_destroy_window(map->mlx,map->window);
-        if (map->map)
-            free(map->map);
-        else if (map->map_2)
-            free(map->map_2);
-    }
     if (flag == 3)
-    {
         write(1,">>>>> Evaluator Gave up <<<<<\n",30);
-        if (map->map)
-            free(map->map);
-        else if (map->map_2)
-            free(map->map_2);
-    }
-    exit(0);
+    exit(1);
 }

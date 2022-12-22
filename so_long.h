@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:02:52 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 18:36:45 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:38:55 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ typedef struct map
 	int		img_w;
 	int		img_h;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
 	char	*wall;
 	char	*ground;
 	char	*exit;
@@ -62,6 +59,7 @@ typedef struct map
 	int     current_location;
 	char	*file_name;
 }		t_map;
+
 //******** so_long.c **********************//
 int 	check_char(char buffer);
 int 	element_validation(t_map *map);
@@ -105,7 +103,7 @@ char	*ft_itoa(int n);
 void 	ft_init_xlm(t_map *map);
 int 	locate_element(t_map *m, char c);
 int 	locate_char(t_map *m);
-int 	locate_enemey(t_map *m);
+int 	locate_enemy(t_map *m);
 int 	locate_exit(t_map *m);
 char	*ft_strjoin(char const *s1, char const	*s2);
 //*******init.c *******************
