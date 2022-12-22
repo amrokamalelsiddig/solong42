@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/19 17:50:14 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:53:07 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ void error_handling(int i)
 {
     red();
     if (i == 1)
-        printf("map unvalied \n");
+        ft_putstr_fd("map unvalied \n", 1);
     else if (i == 3)
-        printf("\nborder unvalid\n");
+        ft_putstr_fd("\nborder unvalid\n", 1);
     else if (i == 4)
-        printf("\nUpper / Lower boarder is not valid\n");
+        ft_putstr_fd("\nUpper / Lower boarder is not valid\n", 1);
     else if (i == 5)
-        printf("\nside boarder not valid\n");
+        ft_putstr_fd("\nside boarder not valid\n", 1);
     else if (i == 6)
-        printf("\nreading error\n");
+        ft_putstr_fd("\nreading error\n", 1);
     else if (i == 7)
-        printf("\nFailed >> Moved outside map boarder\n");
+        ft_putstr_fd("\nFailed >> Moved outside map boarder\n", 1);
     else if (i == 8)
-        printf("\nError : No Valid Path \n");
+        ft_putstr_fd("\nError : No Valid Path \n", 1);
     else if (i == 9)
-        printf("Failed >> 1 or More of Required Element Missing  \n");
-	else if (i == 10)
-		printf("\n invalid : File extension not ber\n");
-	else if (i == 11)
-		printf("\n issue with width/hight\n");
+        ft_putstr_fd("Failed >> 1 or More of Required Element Missing  \n", 1);
+    else if (i == 10)
+        ft_putstr_fd("\n invalid : File extension not ber\n", 1);
+    else if (i == 11)
+        ft_putstr_fd("\n issue with width/hight\n", 1);
     reset();
     exit(1);
 }
