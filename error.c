@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/22 16:53:07 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:55:06 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void error_handling(int i)
 void error_handling1(int i,int fd,t_map *m)
 {
 	(void)m;
-	if(fd >-1)
+	if(fd >= 1)
 	{
 		close(fd);
 	}
@@ -60,18 +60,26 @@ void error_handling1(int i,int fd,t_map *m)
 
 void exiting(t_map *map, int flag)
 {
-    mlx_destroy_window(map->mlx,map->window);
-    if (map->map)
-        free(map->map);
-    if (map->map_2)
-        free(map->map_2);
-    if (map->fd > 0)
-        close(map->fd);
+    printf("herrrrrrrrrrrrre\n");
     if (flag == 1)      
+    {
+        // mlx_destroy_window(map->mlx,map->window);
+        // if (map->map)
+        //     free(map->map);
+        // if (map->map_2)
+        //     free(map->map_2);
         write(1,">>>>> Game Over <<<<<\n",22);
+    }
     if (flag == 2)
         write(1,">>>>> DIE HARD NOOB !! <<<<<\n",30);
     if (flag == 3)
+    {
+        // if (map->map)
+        //     free(map->map);
+        // if (map->map_2)
+        //     free(map->map_2);
         write(1,">>>>> Evaluator Gave up <<<<<\n",30);
+    }
+        // mlx_destroy_window(map->mlx,map->window);
     exit(1);
 }

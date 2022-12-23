@@ -6,7 +6,7 @@
 #    By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 13:46:37 by aelsiddi          #+#    #+#              #
-#    Updated: 2022/12/18 18:42:40 by aelsiddi         ###   ########.fr        #
+#    Updated: 2022/12/23 18:34:47 by aelsiddi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,22 +19,23 @@ SRCS 	= 	vail.c\
 			path.c\
 			so_long.c\
 			ft_itoa.c\
-			desposlable.c
+			desposlable.c\
+			ft_strjoin.c
 
 RM				= rm -f
 CFLAGS			= -g -Wall -Wextra -Werror.
 
 NAME			= so_long
 
-# ifeq ($(shell uname -s), Darwin)
-# 	CFLAGS += -Imlx
-# 	MLX = -Lminilibx_macos -lmlx -framework OpenGl -framework APPKit
-# 	MLX_LIB = minilibx_macos
-# else ifeq ($(shell uname -s), Linux)
-# 	CFLAGS += -Imlx
-	MLX =  -libmlx_Linux -lmlx -L/usr/lib -Imlx_linux -lmlx -lXext -lX11  -o
+ifeq ($(shell uname -s), Darwin)
+	CFLAGS += -Imlx
+	MLX = -Lminilibx_macos -lmlx -framework OpenGl -framework APPKit
+#MLX_LIB = minilibx_macos
+else ifeq ($(shell uname -s), Linux)
+	CFLAGS += -Imlx
+	MLX =  -Imlx_Linux -lmlx -L/usr/lib -Imlx_linux -lmlx -lXext -lX11  -o
 # 	MLX_LIB = minilibx-linux
-# endif
+endif
 
 # SUBDIRS = $(MLX_LIB)
 

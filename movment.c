@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:35:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/19 17:36:31 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:14:27 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,6 @@ int locate_char(t_map *m)
 
 	i = 0;
 	while (m->map[i] != 'P')
-		i++;
-	m->current_location = i; 
-	return (i);
-}
-
-int locate_enemy(t_map *m)
-{
-	int i;
-
-	i = 0;
-	while (m->map[i] != 'N')
 		i++;
 	m->current_location = i; 
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 10:54:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 18:38:46 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:26:57 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ void	ft_init_xlm(t_map *map)
 		"./img/exit.xpm",&map->img_w, &map->img_h);
 	map->img_clc = mlx_xpm_file_to_image(map->mlx,"./img/collect.xpm",\
 		&map->img_w, &map->img_h);
-
 	map->img_char = mlx_xpm_file_to_image(map->mlx,"./img/player.xpm",&map->img_w, &map->img_h);
-	// map->img_char = mlx_xpm_file_to_image(map->mlx,pic_path(map,1,'P'),&map->img_w, &map->img_h);
 	map->img_eney = mlx_xpm_file_to_image(map->mlx, "./img/enemy1.xpm", &map->img_w, &map->img_h);
 	
 }
@@ -83,7 +81,7 @@ char *pic_path(t_map *map,int i, char c)
 	char *res;
 	char *holder;
 	
-	if (i = 1 && c == 'P')
+	if ((i = 1) && (c == 'P'))
 	{
 		if ( map->mo_flag < 17)
 		{
@@ -100,6 +98,7 @@ char *pic_path(t_map *map,int i, char c)
 
 int	mlx_close(int keycode, t_map *map)
 {
+	// (void)keycode;
 	exiting(map,3);
 	return (0);
 }
@@ -119,11 +118,10 @@ int	main(int ac, char **argv)
 	ft_init(&map);
 	valid(argv[1],&map);
 	ft_init_xlm(&map);
-	// print_move(&map);
 	draw(&map);
 	mlx_key_hook(map.window, move_char, &map);
-	mlx_hook(map.window, 17, 1L << 0, mlx_close, &map);
 	mlx_loop_hook(map.mlx, enemy_move, &map);
+	mlx_hook(map.window, 17, 1L << 0, mlx_close, &map);
 	mlx_loop(map.mlx);
 	return (0);
 }

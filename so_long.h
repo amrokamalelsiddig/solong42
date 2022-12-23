@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:02:52 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/19 17:38:55 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2022/12/23 19:13:49 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void 	check_cond(char *av);
 void 	valid(char *av, t_map *map);
 char 	*pic_path(t_map *map,int i, char c);
 void 	rest_z(t_map *map);
+int	mlx_close(int keycode, t_map *map);
 #endif
 
 //top -pid 48423 -stats "pid,command,MEM" 
