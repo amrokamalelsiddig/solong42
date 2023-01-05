@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+         #
+#    By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 13:46:37 by aelsiddi          #+#    #+#              #
-#    Updated: 2022/12/23 18:34:47 by aelsiddi         ###   ########.fr        #
+#    Updated: 2023/01/05 18:45:35 by aelsiddi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,41 +22,30 @@ SRCS 	= 	vail.c\
 			desposlable.c\
 			ft_strjoin.c
 
+OBJS			= $(SRCS:.c=.o)
+CC				= gcc
 RM				= rm -f
-CFLAGS			= -g -Wall -Wextra -Werror.
+CFLAGS			= -g -Wall -Wextra -Werror -I.
 
 NAME			= so_long
 
-ifeq ($(shell uname -s), Darwin)
-	CFLAGS += -Imlx
-	MLX = -Lminilibx_macos -lmlx -framework OpenGl -framework APPKit
-#MLX_LIB = minilibx_macos
-else ifeq ($(shell uname -s), Linux)
-	CFLAGS += -Imlx
-	MLX =  -Imlx_Linux -lmlx -L/usr/lib -Imlx_linux -lmlx -lXext -lX11  -o
-# 	MLX_LIB = minilibx-linux
-endif
+MLX				= minilibx/libmlx.a
 
-# SUBDIRS = $(MLX_LIB)
+all:			$(NAME)
 
-CC = gcc
+$(MLX)			: 
+					make -C minilibx
 
-OBJS = $(SRC:.c=.o)
-
-all: $(NAME)
-
-.c.o:
-	$(CC) $(CFLAGS) -I/usr/include -Imlx_linux -O $< -o $@
-
-$(NAME): $(OBJS)
-	$(CC) $(CFALGS) $(SRCS) $(MLX) -Imlx_linux -lXext -lX11  -o $(NAME)
+$(NAME):		$(OBJS) $(MLX)
+				cc $(MLX) -framework OpenGL -framework AppKit  $(OBJS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
+				$(RM) $(OBJS) 
+				make -C minilibx clean
 
-fclean: clean
-	rm -f $(NAME)
+fclean:			clean
+				$(RM) $(NAME)
 
-re : fclean all
+re:				fclean $(NAME)
 
-.PHONY: clean fclean all re
+.PHONY:			all clean fclean re

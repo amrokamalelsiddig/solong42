@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movment.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:35:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/02 12:42:22 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 03:37:09 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,22 @@ int	ft_capture(int key, t_map *m)
 
 void 	move_up(t_map *m, int current_loc, char self, char enemy)
 {
+	// int pre_loc;
 	(void)enemy;
 	if (m->map[current_loc - m->width] != '1')
 	{
 		if (m->map[current_loc - m->width] == 'N' ||m->map[current_loc - m->width] == 'E' )
 			exiting(m,1);
 		m->map[m->current_location] = '0';
+		//save previous location
+		// pre_loc = m->current_location;
 		m->current_location = m->current_location - m->width;
+		//put background image in previous location
+		// mlx_put_image_to_window(m->mlx, m->window, m->img_char, m->d_j, m->d_i);
+		// maybe use image destroy
 		m->map[m->current_location] = self;
 		if (self == 'P')
-			m->count_moves++;
+			m->c_moves++;
 	}
 }
 
@@ -39,13 +45,13 @@ void	move_down(t_map *m, int current_loc, char self, char enemy)
 	(void)enemy;		
 	if (m->map[current_loc + m->width] != '1')
 	{
-		if (m->map[current_loc + m->width] == 'N' || m->map[current_loc + m->width] == 'E' )
-			exiting(m,1);
+		if (m->map[current_loc + m->width] == 'N'|| m->map[current_loc + m->width] == 'E' )
+			exiting(m, 1);
 		m->map[m->current_location] = '0';
 		m->current_location = m->current_location + m->width;
 		m->map[m->current_location] = self;
 		if (self == 'P')
-			m->count_moves++;
+			m->c_moves++;
 	}
 }
 
@@ -54,28 +60,28 @@ void	move_right(t_map *m, int current_loc, char self, char enemy)
 	(void)enemy;
 	if (m->map[current_loc + 1] != '1' )
 	{
-		if (m->map[current_loc + 1] == 'N' ||m->map[current_loc + 1] == 'E' )
-			exiting(m,1);
+		if (m->map[current_loc + 1] == 'N'||m->map[current_loc + 1] == 'E' )
+			exiting(m, 1);
 		m->map[m->current_location] = '0';
 		m->current_location = m->current_location + 1;
 		m->map[m->current_location] = self;
 		if (self == 'P')
-			m->count_moves++;
+			m->c_moves++;
 	}
 }
 
 void	move_left(t_map *m, int current_loc, char self, char enemy)
 {
 	(void)enemy;
-	if (m->map[current_loc - 1] != '1' ) 
+	if (m->map[current_loc - 1] != '1' )
 	{
 		if (m->map[current_loc - 1] == 'N' || m->map[current_loc - 1] == 'E' )
-			exiting(m,1);
+			exiting(m, 1);
 		m->map[m->current_location] = '0';
 		m->current_location = m->current_location - 1;
 		m->map[m->current_location] = self;
 		if (self == 'P')
-			m->count_moves++;
+			m->c_moves++;
 	}
 }
 
@@ -84,57 +90,47 @@ int		move_char(int c, t_map *m)
 	int	current_loc;
 
 	current_loc = locate_char(m);
-	if (c == 13 || c == 65362) 
+	if (c == 13 || c == 65362)
 		move_up(m, current_loc, 'P', 'N');
-	else if (c == 0 || c ==  65361)
+	else if (c == 0 || c == 65361)
 		move_left(m, current_loc, 'P', 'N');
 	else if (c == 1 || c == 65364)
 		move_down(m, current_loc, 'P', 'N');
-	else if (c == 2 || c == 65363 )
+	else if (c == 2 || c == 65363)
 		move_right(m, current_loc, 'P', 'N');
 	else if (c == 53 || c == 99 || c == 65307)
-		exiting(m,1);
+		exiting(m, 1);
 	print_move(m);
 	draw(m);
 	return (0);
 }
 
-int locate_char(t_map *m)
+int	enemy_move(t_map *m)
 {
-	int i;
+	static int	flag = 0;
+	int			enemy_loc;
 
-	i = 0;
-	while (m->map[i] != 'P')
-		i++;
-	m->current_location = i; 
-	return (i);
-}
-
-int enemy_move(t_map *m)
-{
-    int enemy_loc;
-    static int flag=0;
-
-    enemy_loc = locate_enemy(m);
-    if(m->map[enemy_loc + 1 ] == '0' && flag == 0) 
-    {
-        m->map[enemy_loc] = '0';
-        enemy_loc++;
-        m->map[enemy_loc] = 'N';
-
-    }
-    else if (m->map[enemy_loc - 1 ] == '0' )
-    {
-        flag = 1;
-        m->map[enemy_loc] = '0';
-        enemy_loc--;
-        m->map[enemy_loc] = 'N';
-        if (m->map[enemy_loc - 1 ] == '1' )
-    flag =0;
-    }
-	else if (m->map[enemy_loc + 1 ] || m->map[enemy_loc - 1 ])
-		exiting(m,2);
-    usleep(100000);
-    draw(m);
-	return (0);
+	enemy_loc = locate_enemy(m);
+	if (!(enemy_loc))
+		return (0);
+	if (m->map[enemy_loc + 1] == '0' && flag == 0)
+	{
+		m->map[enemy_loc] = '0';
+		enemy_loc++;
+		m->map[enemy_loc] = 'N';
+	}
+	else if (m->map[enemy_loc - 1] == '0')
+	{
+		flag = 1;
+		m->map[enemy_loc] = '0';
+		enemy_loc--;
+		m->map[enemy_loc] = 'N';
+		if (m->map[enemy_loc - 1] == '1' )
+		flag = 0;
+	}
+	else if (m->map[enemy_loc + 1] || m->map[enemy_loc - 1])
+		exiting(m, 2);
+	usleep(100000);
+	draw(m);
+	return (1);
 }

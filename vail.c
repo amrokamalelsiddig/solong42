@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   vail.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
+/*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/01 22:18:50 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 03:52:02 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int check_char(char buffer)
+int	check_char(char buffer)
 {
-	if (   buffer  == '0'    || buffer == '1'|| buffer   == 'C'   
-		|| buffer   == 'P'   || buffer == 'E'|| buffer == 'N' || buffer  == '\n') // added in order to allow for the condiation to be met while reading 
+	if (buffer == '0' || buffer == '1'|| buffer == 'C' \
+		|| buffer == 'P' || buffer == 'E'|| buffer == 'N' \
+		|| buffer == '\n')
 		return (1);
 	else
 		return (0);
 }
 
-int element_validation(t_map *map)
+int	element_validation(t_map *map)
 {
-	char 	buffer;
-	
-	map->fd = open(map->file_name,O_RDONLY);
-	while (read(map->fd, &buffer,1))
+	char	buffer;
+
+	map->fd = open(map->file_name, O_RDONLY);
+	while (read(map->fd, &buffer, 1))
 	{
 		if (buffer == 'C')
 			map->count_c = map->count_c + 1;
@@ -41,48 +42,47 @@ int element_validation(t_map *map)
 	return (1);
 }
 
-int validation(t_map *map)
+int	validation(t_map *map)
 {
-	int width;
-	int hight;
-	int v_width;
-	char buff;
+	char	buff;
+	int		width;
+	int		hight;
+	int		v_width;
 
 	width = 0;
 	hight = 1;
 	v_width = 0;
-	while(read(map->fd2,&buff,1)&& check_char(buff) && buff != '\n')
+	while (read(map->fd2, &buff, 1) && check_char(buff) && buff != '\n' )
 		width++;
-	while (read(map->fd2,&buff,1) && check_char(buff))
+	while (read(map->fd2, &buff, 1) && check_char(buff))
 	{
-		if(buff == '\n')
+		if (buff == '\n')
 		{
 			hight++;
-			if(v_width == width)
+			if (v_width == width)
 				v_width = 0;
 			else if (v_width != width)
-				error_handling(3);
-		}  
+				error_handling1(3, map->fd3, map);
+		}
 		else if (buff != '\n')
-			v_width++; 
+			v_width++;
 	}
 	hight++;
-	ft_in(map,hight,width);
-	close(map->fd);
+	ft_in(map, hight, width);
 	return (width * hight);
 }
 
-void fill_map(t_map *map)
+void	fill_map(t_map *map)
 {
-	int i;
-	char buff;
-	int fd = 0;
-	
-	fd = open(map->file_name,O_RDONLY);
-	map->map = (char*)malloc(map->size);
-	map->map_2 = (char*)malloc(map->size);
+	char	buff;
+	int		i;
+	int		fd;
+
+	fd = open(map->file_name, O_RDONLY);
+	map->map = (char *)malloc (map->size);
+	map->map_2 = (char *)malloc(map->size);
 	i = 0;
-	while(read(map->fd,&buff,1))
+	while (read(map->fd, &buff, 1))
 	{
 		if (buff != '\n')
 		{
@@ -91,8 +91,8 @@ void fill_map(t_map *map)
 			i++;
 		}
 	}
-	// map->map[i] == '\0';
-	// map->map_2[i] == '\0';
+	map->map[i] = '\0';
+	map->map_2[i] = '\0';
 	close(fd);
 }
 
@@ -101,7 +101,7 @@ int border_validation(t_map *map)
 {
 	int i;
 	int z ;
-	
+
 	z = (map->width * (map->hight - 1));
 	i = 0;
 	while(i < map->width)
@@ -115,9 +115,9 @@ int border_validation(t_map *map)
 			error_handling(4);
 	}
 	i = 1;
-	while (i <=  map->hight)
+	while (i <= map->hight)
 	{
-		if(map->map[i - 1 ] == '1' && map->map[map->width*i-1] == '1')
+		if(map->map[i - 1 ] == '1' && map->map[map->width * i - 1] == '1')
 			i++;
 		else
 			error_handling(5);
@@ -130,7 +130,7 @@ void check_cond(char *av)
 	int i;
 
 	i = 0;
-	while(av[i++])
+	while (av[i++])
 	{
 		while (av[i] != '.')
 			i++;
@@ -147,9 +147,9 @@ void check_cond(char *av)
 void valid(char *av, t_map *map)
 {
 	check_cond(av);
-	map->fd = open(av,O_RDONLY);
+	map->fd = open(av, O_RDONLY);
 	if (!(map->fd))
-		exiting(map,1);
+		exiting(map, 1);
 		// error_handling1(8,-1,NULL);
 	element_validation(map);
 	if (validation(map) < 0)
