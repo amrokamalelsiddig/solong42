@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 10:54:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/31 13:32:10 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:41:37 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,15 @@ char *pic_path(t_map *map,int i, char c)
 
 int	mlx_close(int keycode, t_map *map)
 {
-	// (void)keycode;
-	exiting(map,3);
+	mlx_destroy_window(map->mlx,map->window);
+	// exiting(map,3);
+	return (0);
+}
+
+int	mlx_close2(t_map *map)
+{
+	mlx_destroy_window(map->mlx,map->window);
+	// exiting(map,3);
 	return (0);
 }
 
@@ -110,18 +117,16 @@ int	main(int ac, char **argv)
 	(void)ac;
 	map.file_name = argv[1];
 	map.fd = open(argv[1],O_RDONLY);
-	if (map.fd <= 0)
-		error_handling(1);
 	map.fd2 = open(argv[1],O_RDONLY);
-	if (map.fd2 <= 0)
-		error_handling(1);
+	if (map.fd <= 0 || map.fd2 <= 0)
+		exiting(&map,1);
 	ft_init(&map);
 	valid(argv[1],&map);
 	ft_init_xlm(&map);
 	draw(&map);
 	mlx_key_hook(map.window, move_char, &map);
 	mlx_loop_hook(map.mlx, enemy_move, &map);
-	mlx_hook(map.window, 17, 1L << 0, mlx_close, &map);
+	mlx_hook(map.window, 17, 1L << 0, mlx_close2, &map);
 	mlx_loop(map.mlx);
 	return (0);
 }

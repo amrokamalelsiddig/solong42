@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/01 21:04:04 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/01 22:19:23 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,21 @@ void error_handling1(int i,int fd,t_map *m)
 
 void exiting(t_map *map, int flag)
 {
-    // printf("herrrrrrrrrrrrre\n");
-    if (flag == 1)      
+    if (map->fd > 0)
+        close(map->fd);
+    if (flag == 1)
     {
-        mlx_destroy_window(map->mlx,map->window);
-        if (map->map)
-            free(map->map);
-        if (map->map_2)
-            free(map->map_2);
         write(1,">>>>> Game Over <<<<<\n",22);
     }
+    // if (flag == 1)      
+    // {
+    //     mlx_destroy_window(map->mlx,map->window);
+    //     if (map->map)
+    //         free(map->map);
+    //     if (map->map_2)
+    //         free(map->map_2);
+    //     write(1,">>>>> Game Over <<<<<\n",22);
+    // }
     if (flag == 2)
     {
         mlx_destroy_window(map->mlx,map->window);
@@ -90,5 +95,5 @@ void exiting(t_map *map, int flag)
         mlx_destroy_window(map->mlx,map->window);
 
     }
-    // exit(0);
+    exit(0);
 }

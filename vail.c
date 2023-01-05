@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42.ae>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2022/12/18 18:23:28 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/01 22:18:50 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,8 @@ void valid(char *av, t_map *map)
 	check_cond(av);
 	map->fd = open(av,O_RDONLY);
 	if (!(map->fd))
-		error_handling1(8,-1,NULL);
+		exiting(map,1);
+		// error_handling1(8,-1,NULL);
 	element_validation(map);
 	if (validation(map) < 0)
 		error_handling1(11,map->fd2,NULL);
