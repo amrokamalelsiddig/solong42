@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 20:53:40 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 10:08:15 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:43:15 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	move_char(int c, t_map *m)
 	else if (c == 2 || c == 65363)
 		move_right(m, current_loc, 'P');
 	else if (c == 53 || c == 99 || c == 65307)
-		exiting(m, 1);
+		exiting(m, 3);
 	print_move(m);
 	draw(m);
 	return (0);

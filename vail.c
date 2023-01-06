@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 10:37:19 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:40:00 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int	element_validation(t_map *map)
 			map->count_e = map->count_e + 1 ;
 	}
 	close(map->fd);
-	if (!(map->count_c > 0 && map->count_p > 0 && map->count_e > 0))
+	if (!(map->count_c > 0 && map->count_p > 0 && map->count_e > 0) \
+		|| (map->count_p > 1))
 		error_handling(9);
 	return (1);
 }
@@ -103,7 +104,7 @@ void	valid(char *av, t_map *map)
 	check_cond(av);
 	map->fd = open(av, O_RDONLY);
 	if (!(map->fd))
-		exiting(map, 1);
+		exiting(map, 4);
 	element_validation(map);
 	if (validation(map) < 0)
 		error_handling1(11, map->fd2, NULL);

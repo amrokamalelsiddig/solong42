@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 10:54:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 09:41:28 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 11:40:07 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int ac, char **argv)
 	map.fd = open(argv[1], O_RDONLY);
 	map.fd2 = open(argv[1], O_RDONLY);
 	if (map.fd <= 0 || map.fd2 <= 0)
-		exiting(&map, 1);
+		exiting(&map, 4);
 	ft_init(&map);
 	valid(argv[1], &map);
 	ft_init_xlm(&map);
