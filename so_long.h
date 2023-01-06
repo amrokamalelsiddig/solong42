@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:02:52 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:35:57 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 04:06:53 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,10 @@ void	yellow(void);
 void	Black(void);
 void	Cyan(void);
 //************* movment ***********************//
-void	move_up(t_map *m, int current_loc, char self, char enemy);
-void	move_down(t_map *m, int current_loc, char self, char enemy);
-void	move_right(t_map *m, int current_loc, char self, char enemy);
-void	move_left(t_map *m, int current_loc, char self, char enemy);
+void	move_up(t_map *m, int current_loc, char self);
+void	move_down(t_map *m, int current_loc, char self);
+void	move_right(t_map *m, int current_loc, char self);
+void	move_left(t_map *m, int current_loc, char self);
 void	draw(t_map *m);
 void	ft_putnbr_fd(int n, int fd);
 void	death(int loc_p, int loc_e, int loc_en);

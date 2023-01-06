@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:08:04 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 04:01:13 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ void	exiting(t_map *map, int flag)
 		close(map->fd2);
 	if (map->fd3 > 0)
 		close(map->fd3);
-	// if (map->map)
-	// 	free(map->map);
-	// if (map->map_2)
-	// 	free(map->map_2);
 	if (flag == 1)
 		ft_putstr_fd(">>>>> Game Over <<<<<\n", 1);
 	if (flag == 2)
@@ -81,6 +77,5 @@ void	exiting(t_map *map, int flag)
 	{
 		ft_putstr_fd(">>>>> Evaluator Gave up <<<<<\n", 1);
 	}
-	// mlx_destroy_window(map->mlx, map->window);
 	exit(0);
 }

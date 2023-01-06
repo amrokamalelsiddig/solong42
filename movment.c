@@ -6,46 +6,33 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:35:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:37:09 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 04:08:18 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_capture(int key, t_map *m)
+void	move_up(t_map *m, int current_loc, char self)
 {
-	(void) key;
-	(void) *m;
-	return (0);
-}
-
-void 	move_up(t_map *m, int current_loc, char self, char enemy)
-{
-	// int pre_loc;
-	(void)enemy;
 	if (m->map[current_loc - m->width] != '1')
 	{
-		if (m->map[current_loc - m->width] == 'N' ||m->map[current_loc - m->width] == 'E' )
-			exiting(m,1);
+		if (m->map[current_loc - m->width] == 'N' \
+		||m->map[current_loc - m->width] == 'E' )
+			exiting(m, 1);
 		m->map[m->current_location] = '0';
-		//save previous location
-		// pre_loc = m->current_location;
 		m->current_location = m->current_location - m->width;
-		//put background image in previous location
-		// mlx_put_image_to_window(m->mlx, m->window, m->img_char, m->d_j, m->d_i);
-		// maybe use image destroy
 		m->map[m->current_location] = self;
 		if (self == 'P')
 			m->c_moves++;
 	}
 }
 
-void	move_down(t_map *m, int current_loc, char self, char enemy)
-{
-	(void)enemy;		
+void	move_down(t_map *m, int current_loc, char self)
+{	
 	if (m->map[current_loc + m->width] != '1')
 	{
-		if (m->map[current_loc + m->width] == 'N'|| m->map[current_loc + m->width] == 'E' )
+		if (m->map[current_loc + m->width] == 'N' \
+		|| m->map[current_loc + m->width] == 'E' )
 			exiting(m, 1);
 		m->map[m->current_location] = '0';
 		m->current_location = m->current_location + m->width;
@@ -55,12 +42,12 @@ void	move_down(t_map *m, int current_loc, char self, char enemy)
 	}
 }
 
-void	move_right(t_map *m, int current_loc, char self, char enemy)
+void	move_right(t_map *m, int current_loc, char self)
 {
-	(void)enemy;
 	if (m->map[current_loc + 1] != '1' )
 	{
-		if (m->map[current_loc + 1] == 'N'||m->map[current_loc + 1] == 'E' )
+		if (m->map[current_loc + 1] == 'N'\
+		||m->map[current_loc + 1] == 'E' )
 			exiting(m, 1);
 		m->map[m->current_location] = '0';
 		m->current_location = m->current_location + 1;
@@ -70,12 +57,12 @@ void	move_right(t_map *m, int current_loc, char self, char enemy)
 	}
 }
 
-void	move_left(t_map *m, int current_loc, char self, char enemy)
+void	move_left(t_map *m, int current_loc, char self)
 {
-	(void)enemy;
 	if (m->map[current_loc - 1] != '1' )
 	{
-		if (m->map[current_loc - 1] == 'N' || m->map[current_loc - 1] == 'E' )
+		if (m->map[current_loc - 1] == 'N'\
+		|| m->map[current_loc - 1] == 'E' )
 			exiting(m, 1);
 		m->map[m->current_location] = '0';
 		m->current_location = m->current_location - 1;
@@ -85,19 +72,19 @@ void	move_left(t_map *m, int current_loc, char self, char enemy)
 	}
 }
 
-int		move_char(int c, t_map *m)
+int	move_char(int c, t_map *m)
 {
 	int	current_loc;
 
 	current_loc = locate_char(m);
 	if (c == 13 || c == 65362)
-		move_up(m, current_loc, 'P', 'N');
+		move_up(m, current_loc, 'P');
 	else if (c == 0 || c == 65361)
-		move_left(m, current_loc, 'P', 'N');
+		move_left(m, current_loc, 'P');
 	else if (c == 1 || c == 65364)
-		move_down(m, current_loc, 'P', 'N');
+		move_down(m, current_loc, 'P');
 	else if (c == 2 || c == 65363)
-		move_right(m, current_loc, 'P', 'N');
+		move_right(m, current_loc, 'P');
 	else if (c == 53 || c == 99 || c == 65307)
 		exiting(m, 1);
 	print_move(m);

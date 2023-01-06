@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:52:02 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 03:55:04 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,14 @@ void	fill_map(t_map *map)
 	close(fd);
 }
 
-// This funcatioon will check border of the map and ensure they are all r walls
-int border_validation(t_map *map)
+int	border_validation(t_map *map)
 {
-	int i;
-	int z ;
+	int	i;
+	int	z;
 
 	z = (map->width * (map->hight - 1));
 	i = 0;
-	while(i < map->width)
+	while (i < map->width)
 	{
 		if (map->map[i] == '1' && map->map[z] == '1' )
 		{
@@ -117,7 +116,7 @@ int border_validation(t_map *map)
 	i = 1;
 	while (i <= map->hight)
 	{
-		if(map->map[i - 1 ] == '1' && map->map[map->width * i - 1] == '1')
+		if (map->map[i - 1 ] == '1' && map->map[map->width * i - 1] == '1')
 			i++;
 		else
 			error_handling(5);
@@ -125,9 +124,9 @@ int border_validation(t_map *map)
 	return (1);
 }
 
-void check_cond(char *av)
+void	check_cond(char *av)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (av[i++])
@@ -136,8 +135,8 @@ void check_cond(char *av)
 			i++;
 		if (av[i]== '.')
 		{
-			if (av[i + 1] == 'b' && av[i+ 2] == 'e' && av[i+ 3] == 'r' )
-				return;
+			if (av[i + 1] == 'b' && av[i + 2] == 'e' && av[i + 3] == 'r' )
+				return ;
 			error_handling(10);
 		}	
 	}
@@ -150,15 +149,14 @@ void valid(char *av, t_map *map)
 	map->fd = open(av, O_RDONLY);
 	if (!(map->fd))
 		exiting(map, 1);
-		// error_handling1(8,-1,NULL);
 	element_validation(map);
 	if (validation(map) < 0)
-		error_handling1(11,map->fd2,NULL);
+		error_handling1(11,map->fd2, NULL);
 	map->fd3 = map->fd;
 	fill_map(map);
 	if (border_validation(map) != 1)
 		error_handling(3);
-	check_box(map,locate_char(map));
+	check_box(map, locate_char(map));
 	if (!(map->valid == 1) || map->collect_path != map->count_c)
 		error_handling(8);
 }

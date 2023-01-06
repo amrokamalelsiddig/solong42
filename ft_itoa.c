@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 17:01:10 by yidrissi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:01:44 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 04:01:36 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ char	*ft_strdup(const char	*s1)
 		i++;
 	}
 	ptr[i] = '\0';
-	// if (ptr)
-		free(ptr);
+	free(ptr);
 	return (ptr);
 }
 
@@ -116,7 +115,6 @@ char	*ft_itoa(int n)
 	if (n < 0)
 		result[i++] = '-';
 	result[i] = '\0';
-	// if (result)
-		free(result);
+	free(result);
 	return (ft_reverse(result));
 }
