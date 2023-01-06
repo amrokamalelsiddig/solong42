@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   desposlable.c                                      :+:      :+:    :+:   */
+/*   misc.c		                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -45,5 +45,15 @@ int	locate_char(t_map *m)
 	while (m->map[i] != 'P')
 		i++;
 	m->current_location = i;
+	return (i);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
 	return (i);
 }

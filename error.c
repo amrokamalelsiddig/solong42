@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:16:22 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 04:01:13 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:05:41 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	error_handling(int i)
 {
-	red();
 	if (i == 1)
 		ft_putstr_fd("map unvalied \n", 1);
 	else if (i == 3)
@@ -35,7 +34,6 @@ void	error_handling(int i)
 		ft_putstr_fd("\n invalid : File extension not ber\n", 1);
 	else if (i == 11)
 		ft_putstr_fd("\n issue with width/hight\n", 1);
-	reset();
 	exit(1);
 }
 
@@ -46,7 +44,6 @@ void	error_handling1(int i, int fd, t_map *m)
 	{
 		close(fd);
 	}
-	red();
 	if (i == 1)
 		printf("map unvalied \n");
 	else if (i == 3)
@@ -55,7 +52,6 @@ void	error_handling1(int i, int fd, t_map *m)
 		printf("\nFileError : 3No Valid Path \n");
 	else if (i == 11)
 		printf("\n issue with width/hight\n");
-	reset();
 	exit(1);
 }
 

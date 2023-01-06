@@ -6,7 +6,7 @@
 #    By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/10 13:46:37 by aelsiddi          #+#    #+#              #
-#    Updated: 2023/01/05 18:45:35 by aelsiddi         ###   ########.fr        #
+#    Updated: 2023/01/06 10:03:20 by aelsiddi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,11 @@ SRCS 	= 	vail.c\
 			init.c\
 			error.c\
 			print.c\
-			color.c\
 			movment.c\
 			path.c\
 			so_long.c\
 			ft_itoa.c\
-			desposlable.c\
+			misc.c\
 			ft_strjoin.c
 
 OBJS			= $(SRCS:.c=.o)

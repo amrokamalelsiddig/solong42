@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 19:35:17 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 04:08:18 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:13:23 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,50 +72,29 @@ void	move_left(t_map *m, int current_loc, char self)
 	}
 }
 
-int	move_char(int c, t_map *m)
-{
-	int	current_loc;
-
-	current_loc = locate_char(m);
-	if (c == 13 || c == 65362)
-		move_up(m, current_loc, 'P');
-	else if (c == 0 || c == 65361)
-		move_left(m, current_loc, 'P');
-	else if (c == 1 || c == 65364)
-		move_down(m, current_loc, 'P');
-	else if (c == 2 || c == 65363)
-		move_right(m, current_loc, 'P');
-	else if (c == 53 || c == 99 || c == 65307)
-		exiting(m, 1);
-	print_move(m);
-	draw(m);
-	return (0);
-}
-
 int	enemy_move(t_map *m)
 {
 	static int	flag = 0;
-	int			enemy_loc;
 
-	enemy_loc = locate_enemy(m);
-	if (!(enemy_loc))
+	m->en_loc = locate_enemy(m);
+	if (!(m->en_loc))
 		return (0);
-	if (m->map[enemy_loc + 1] == '0' && flag == 0)
+	if (m->map[m->en_loc + 1] == '0' && flag == 0)
 	{
-		m->map[enemy_loc] = '0';
-		enemy_loc++;
-		m->map[enemy_loc] = 'N';
+		m->map[m->en_loc] = '0';
+		m->en_loc++;
+		m->map[m->en_loc] = 'N';
 	}
-	else if (m->map[enemy_loc - 1] == '0')
+	else if (m->map[m->en_loc - 1] == '0')
 	{
 		flag = 1;
-		m->map[enemy_loc] = '0';
-		enemy_loc--;
-		m->map[enemy_loc] = 'N';
-		if (m->map[enemy_loc - 1] == '1' )
+		m->map[m->en_loc] = '0';
+		m->en_loc--;
+		m->map[m->en_loc] = 'N';
+		if (m->map[m->en_loc - 1] == '1' )
 		flag = 0;
 	}
-	else if (m->map[enemy_loc + 1] || m->map[enemy_loc - 1])
+	else if (m->map[m->en_loc + 1] || m->map[m->en_loc - 1])
 		exiting(m, 2);
 	usleep(100000);
 	draw(m);

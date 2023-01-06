@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 22:18:26 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:55:04 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:37:19 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_char(char buffer)
 {
-	if (buffer == '0' || buffer == '1'|| buffer == 'C' \
-		|| buffer == 'P' || buffer == 'E'|| buffer == 'N' \
+	if (buffer == '0' || buffer == '1' || buffer == 'C' \
+		|| buffer == 'P' || buffer == 'E' || buffer == 'N' \
 		|| buffer == '\n')
 		return (1);
 	else
@@ -45,55 +45,29 @@ int	element_validation(t_map *map)
 int	validation(t_map *map)
 {
 	char	buff;
-	int		width;
-	int		hight;
 	int		v_width;
 
-	width = 0;
-	hight = 1;
+	map->width = 0;
+	map->hight = 1;
 	v_width = 0;
 	while (read(map->fd2, &buff, 1) && check_char(buff) && buff != '\n' )
-		width++;
+		map->width++;
 	while (read(map->fd2, &buff, 1) && check_char(buff))
 	{
 		if (buff == '\n')
 		{
-			hight++;
-			if (v_width == width)
+			map->hight++;
+			if (v_width == map->width)
 				v_width = 0;
-			else if (v_width != width)
+			else if (v_width != map->width)
 				error_handling1(3, map->fd3, map);
 		}
 		else if (buff != '\n')
 			v_width++;
 	}
-	hight++;
-	ft_in(map, hight, width);
-	return (width * hight);
-}
-
-void	fill_map(t_map *map)
-{
-	char	buff;
-	int		i;
-	int		fd;
-
-	fd = open(map->file_name, O_RDONLY);
-	map->map = (char *)malloc (map->size);
-	map->map_2 = (char *)malloc(map->size);
-	i = 0;
-	while (read(map->fd, &buff, 1))
-	{
-		if (buff != '\n')
-		{
-			map->map[i] = buff;
-			map->map_2[i] = buff;
-			i++;
-		}
-	}
-	map->map[i] = '\0';
-	map->map_2[i] = '\0';
-	close(fd);
+	map->hight++;
+	ft_in(map, map->hight, map->width);
+	return (map->width * map->hight);
 }
 
 int	border_validation(t_map *map)
@@ -116,7 +90,7 @@ int	border_validation(t_map *map)
 	i = 1;
 	while (i <= map->hight)
 	{
-		if (map->map[i - 1 ] == '1' && map->map[map->width * i - 1] == '1')
+		if (map->map[i - 1] == '1' && map->map[map->width * i - 1] == '1')
 			i++;
 		else
 			error_handling(5);
@@ -124,26 +98,7 @@ int	border_validation(t_map *map)
 	return (1);
 }
 
-void	check_cond(char *av)
-{
-	int	i;
-
-	i = 0;
-	while (av[i++])
-	{
-		while (av[i] != '.')
-			i++;
-		if (av[i]== '.')
-		{
-			if (av[i + 1] == 'b' && av[i + 2] == 'e' && av[i + 3] == 'r' )
-				return ;
-			error_handling(10);
-		}	
-	}
-	error_handling(10);
-}
-
-void valid(char *av, t_map *map)
+void	valid(char *av, t_map *map)
 {
 	check_cond(av);
 	map->fd = open(av, O_RDONLY);
@@ -151,7 +106,7 @@ void valid(char *av, t_map *map)
 		exiting(map, 1);
 	element_validation(map);
 	if (validation(map) < 0)
-		error_handling1(11,map->fd2, NULL);
+		error_handling1(11, map->fd2, NULL);
 	map->fd3 = map->fd;
 	fill_map(map);
 	if (border_validation(map) != 1)

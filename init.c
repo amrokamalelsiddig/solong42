@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 20:52:21 by aelsiddi          #+#    #+#             */
-/*   Updated: 2023/01/06 03:43:31 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:11:57 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init(t_map *map)
 	map->collect_path = 0;
 	map->d_i = 0;
 	map->d_j = 0;
+	map->en_loc = -1;
 }
 
 void	ft_in(t_map *m, int hight, int width)
@@ -30,7 +31,6 @@ void	ft_in(t_map *m, int hight, int width)
 	m->width = width;
 	m->size = hight * width;
 }
-
 
 void	next_block(t_map *m)
 {

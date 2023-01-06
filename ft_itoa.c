@@ -6,7 +6,7 @@
 /*   By: aelsiddi <aelsiddi@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 17:01:10 by yidrissi          #+#    #+#             */
-/*   Updated: 2023/01/06 04:01:36 by aelsiddi         ###   ########.fr       */
+/*   Updated: 2023/01/06 10:07:20 by aelsiddi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,6 @@ char	*ft_strdup(const char	*s1)
 	ptr[i] = '\0';
 	free(ptr);
 	return (ptr);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
 }
 
 static char	*ft_reverse(char *src)
@@ -112,8 +102,6 @@ char	*ft_itoa(int n)
 		temp = temp / 10;
 		i++;
 	}
-	if (n < 0)
-		result[i++] = '-';
 	result[i] = '\0';
 	free(result);
 	return (ft_reverse(result));
